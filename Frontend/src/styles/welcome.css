@@ -1,0 +1,46 @@
+.welcomePage {
+  height: 700px;               /* Full height of the viewport */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;     /* Horizontally center */
+  align-items: center;         /* Vertically center */
+  background-color: #f5f5f5;   /* Optional: light background */
+}
+
+.welcome {
+  background: white;           /* Optional styling */
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: center;
+}
+
+.vertical {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.side1 {
+    height: 490px;
+    width: 290px;
+    border: 2px solid black;
+}
+
+.side2 {
+    height: 490px;
+    width: 290px;
+    border: 2px solid black;
+}
+
+.horizontal {
+    border: 2px solid black;
+}
+
+.horizontal a {
+  color: blue;
+  cursor: pointer;
+}
