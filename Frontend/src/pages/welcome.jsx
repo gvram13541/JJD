@@ -1,29 +1,24 @@
+import Login from '../components/login'
+
 import '../styles/welcome.css'
+// import dairyImage from '../assets/Dairy-Products.webp';
+
 
 function Welcome() {
     return (
         <> 
-        <div className='welcomePage'>
-            <div className='heading'>
-                <h1>Welcome to JJ Dairies</h1>
-            </div>
+            <div className='welcomePage'>
+                <div className='heading'>
+                    <h1>Welcome to JJ Dairies</h1>
+                    {/* <img src={dairyImage} alt="Dairy products" /> */}
+                </div>
 
-            <div className="welcome">
-                <div className="vertical">
+                <div className="welcome">
                     <div className="side1">
-                        JJD
+                        <Login />
                     </div>
-
-                    <div className="side2">
-                        Login
-                    </div>
-                </div>
-
-                <div className="horizontal">
-                    <a>Login as a Seller!</a>
                 </div>
             </div>
-        </div>
         </>
     )
 }

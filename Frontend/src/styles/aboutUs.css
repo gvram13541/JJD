@@ -4,7 +4,13 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;         
-  /* background-color: #f5f5f5; */
+}
+
+.heading h2 {
+    color: #01e7fc;
+    font-size: bold;
+    font-size: 2rem;
+    font-family: sans-serif;
 }
 
 .cards {

@@ -3,7 +3,15 @@
   display: flex;
   justify-content: space-around;
   align-items: center;         
-  background-color: #f5f5f5;
+  background-color: #01e7fc;
+  width: 100%;
+}
+
+.heading h1 {
+    color: white;
+    font-size: bold;
+    font-size: 40px;
+    font-family: sans-serif;
 }
 
 .welcome {
@@ -18,33 +26,13 @@
   align-items: center;
 }
 
-.vertical {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin-bottom: 1rem;
-}
-
-.side1,
-.side2 {
-  height: 490px;
-  width: 290px;
-  border: 2px solid black;
+.side1 {
+  height: 500px;
+  width: 700px;
+  border: 2px solid #01e7fc;
+  border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
-}
-
-.horizontal {
-  border: 2px solid black;
-  padding: 1rem 2rem;
-  width: 100%;
-}
-
-.horizontal a {
-  color: blue;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 1rem;
 }
