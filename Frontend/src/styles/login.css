@@ -52,7 +52,7 @@
 .formButtons input {
   padding: 0.5rem 1rem;
   border: none;
-  background-color: #007bff;
+  background-color: #01e7fc;
   color: white;
   font-weight: bold;
   border-radius: 4px;
@@ -61,7 +61,7 @@
 }
 
 .formButtons input[type="reset"] {
-  background-color: #dc3545;
+  background-color: #0056b3;
 }
 
 .formButtons input:hover {
@@ -69,7 +69,7 @@
 }
 
 .formButtons input[type="reset"]:hover {
-  background-color: #c82333;
+  background-color: #01e7fc;
 }
 
 .registerPrompt {
@@ -79,7 +79,7 @@
 
 .registerPrompt a {
   text-decoration: none;
-  color: #007bff;
+  color: #01e7fc;
   font-weight: 500;
 }
 
