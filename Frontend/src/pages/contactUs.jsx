@@ -14,7 +14,7 @@ function ContactUs() {
         </div>
 
         <div className="contactItem">
-          📞 Mobile: <a href="tel:+919876543210">+91 98765 43210</a>
+          📞 Mobile: <a href="tel:+919876543210">+91 9998887776</a>
         </div>
 
         <div className="contactItem socialLinks">

@@ -1,5 +1,4 @@
 .reviewsPage {
-  width: 100%;
   padding: 2rem;
   background-color: #01e7fc;
   display: flex;
@@ -53,4 +52,33 @@ h1 {
 .reviewCard span {
   font-style: italic;
   color: #666;
+}
+
+@media (max-width: 900px) {
+  .reviewsPage {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+
+  .reviewsPage .intro {
+    font-size: 1rem;
+    color: white;
+  }
+
+  .reviewsPage h1 {
+    color: white;
+    font-size: 20px;
+  }
+
+  .reviewCards {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+  }
+
+  .reviewCard {
+    width: auto;
+    height: auto;
+  }
 }

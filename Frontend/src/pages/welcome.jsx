@@ -10,7 +10,6 @@ function Welcome() {
             <div className='welcomePage'>
                 <div className='heading'>
                     <h1>Welcome to JJ Dairies</h1>
-                    {/* <img src={dairyImage} alt="Dairy products" /> */}
                 </div>
 
                 <div className="welcome">
