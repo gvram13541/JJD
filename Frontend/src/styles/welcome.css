@@ -3,7 +3,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;         
-  background-color: #01e7fc;
+  background-color: #98f436;
   width: 100%;
 }
 
@@ -29,7 +29,7 @@
 .side1 {
   height: 500px;
   width: 700px;
-  border: 2px solid #01e7fc;
+  border: 2px solid #98f436;
   border-radius: 5px;
   display: flex;
   align-items: center;

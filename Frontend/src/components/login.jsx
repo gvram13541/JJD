@@ -23,11 +23,22 @@ function Login() {
             <form action="#" method="POST" className="loginForm">
                 <h2>{message}</h2>
 
-                <label htmlFor="pnumber">Phone Number:</label>
-                <input type="text" id="pnumber" name="pnumber" />
-
-                <label htmlFor="password">Password:</label>
-                <input type="password" id="password" name="password" />
+                <div className='username'>
+                    <div className="field">
+                      <label htmlFor="pnumber">Phone Number:</label>
+                      <input type="text" id="pnumber" name="pnumber" />
+                    </div>
+                    <div className="or">or</div>
+                    <div className="field">
+                      <label htmlFor="emailid">Email ID:</label>
+                      <input type="text" id="emailid" name="email" />
+                    </div>
+                </div>
+                
+                <div>
+                    <label htmlFor="password">Password:</label>
+                    <input type="password" id="password" name="password" />
+                </div>
 
                 <label>Logging in as:</label>
                 <div className="radioGroup">

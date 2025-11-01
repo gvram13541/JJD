@@ -20,7 +20,7 @@
 .logo {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #01e7fc;
+  color: #98f436;
   margin-right: auto;
 }
 
@@ -30,13 +30,13 @@
 
 .items a {
   text-decoration: none;
-  color: #01e7fc;
+  color: #98f436;
   font-size: 1.2rem;
   transition: color 0.3s;
 }
 
 .items a:hover {
-  color: #01cafc;
+  color: #98f436;
 }
 
 @media (max-width: 900px) {
