@@ -38,7 +38,7 @@ function AboutUs() {
     <div className="about-us-container">
       <h1>About Us</h1>
       <p className="intro">
-        We are a modern dairy e-commerce platform connecting local farmers and customers.
+        We are a modern dairy e-commerce platform connecting local farmers products and customers.
       </p>
       <div className="card-grid">
         {features.map((feature, index) => (
