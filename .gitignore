@@ -1,1 +1,12 @@
+#virtual environment
 myenv
+
+#backend
+Backend/Backend/__pycache__
+
+#users
+Backend/users/__pycache__
+Backend/users/migrations
+
+#databse
+Backend/db.sqlite3
