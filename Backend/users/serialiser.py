@@ -1,11 +1,11 @@
 from rest_framework import serializers
 from django.contrib.auth.hashers import make_password, check_password
-from models import User
+from .models import User
 
 class RegisterSerialiser(serializers.Serializer):
     name = serializers.CharField(max_length=47)
-    phone_number = serializers.CharField(max_length=10, unique=True)
-    email = serializers.EmailField(max_length=100, unique=True)
+    phone_number = serializers.CharField(max_length=10)
+    email = serializers.EmailField(max_length=100)
     password = serializers.CharField(write_only = True, max_length=200)
     village = serializers.CharField(max_length=100)
     street = serializers.CharField(max_length=100)
