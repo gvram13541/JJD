@@ -4,6 +4,7 @@ from .models import User
 
 class RegisterSerialiser(serializers.Serializer):
     name = serializers.CharField(max_length=47)
+    role = serializers.CharField(max_length=10)
     phone_number = serializers.CharField(max_length=10)
     email = serializers.EmailField(max_length=100)
     password = serializers.CharField(write_only = True, max_length=200)
@@ -18,11 +19,13 @@ class RegisterSerialiser(serializers.Serializer):
         return User.objects.create(**validated_data)
 
 class LoginSerialiser(serializers.Serializer):
+    role = serializers.CharField()
     phone_number = serializers.CharField(required=False)
     email = serializers.EmailField(required=False)
     password = serializers.CharField(write_only = True)
 
     def validate(self, data):
+        role = data.get('role')
         email = data.get('email')
         phone_number = data.get('phone_number')
         password = data.get('password')
@@ -32,9 +35,9 @@ class LoginSerialiser(serializers.Serializer):
         
         try:
             if email:
-                user = User.objects.get(email=email)
+                user = User.objects.get(email=email, role=role)
             else:
-                user = User.objects.get(phone_number=phone_number)
+                user = User.objects.get(phone_number=phone_number, role=role)
         except User.DoesNotExist:
             raise serializers.ValidationError("User Does not Exist. Please Register before loging in.")
 

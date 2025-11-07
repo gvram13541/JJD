@@ -2,81 +2,128 @@ import { useState } from 'react';
 import '../styles/register.css';
 
 function Register({setComp}) {
-    const [role, setRole] = useState('buyer');
+    // const [role, setRole] = useState('buyer');
+    const [formData, setFormData] = useState({
+        name: "",
+        phone_number: "",
+        email: "",
+        password: "",
+        cpassword: "",
+        village: "",
+        street: "",
+        district: "",
+        state: "",
+        pincode: "",
+        role: "buyer"
+    });
 
-    const handleRoleChange = (event) => {
-        const value = event.target.value;
-        setRole(value);
+    const handleChange = (event) => {
+        const {name, value} = event.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        if(formData.password !== formData.cpassword){
+            alert("Password donot Match!");
+            return;
+        }
+
+        try {
+            const response = await fetch("http://127.0.0.1:8000/users/register/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+            });
+
+            console.log(response)
+
+            if(!response.ok){
+                throw new Error("Failed to register!");
+            }
+
+            const data = await response.json();
+            console.log("Registered Successfully", data);
+            alert("Registration Sucessful!");
+            setComp("login");
+        } catch (err) {
+            console.error("Error: ", err);
+            alert("Error while Registring!");
+        }
     };
 
     return (
         <div className="register">
-            <form action="#" method="POST" className="registerForm">
-                
-                <div className='sets'>
-                    <div className='set1'>
-                        <label htmlFor="emailid">Name:</label>
-                        <input type="text" id="name" name="name" />
+            <form onSubmit={handleSubmit} className="registerForm">
+                <div className="sets">
+                    <div className="set1">
+                        <label>Name:</label>
+                        <input type="text" name="name" value={formData.name} onChange={handleChange} />
 
-                        <label htmlFor="pnumber">Phone Number:</label>
-                        <input type="text" id="pnumber" name="pnumber" />
+                        <label>Phone Number:</label>
+                        <input type="text" name="phone_number" value={formData.phone_number} onChange={handleChange} />
 
-                        <label htmlFor="emailid">Email ID:</label>
-                        <input type="text" id="emailid" name="email" />
+                        <label>Email ID:</label>
+                        <input type="text" name="email" value={formData.email} onChange={handleChange} />
 
-                        <label htmlFor="village">Village/City Name:</label>
-                        <input type="text" id="village" name="village" />
+                        <label>Village:</label>
+                        <input type="text" name="village" value={formData.village} onChange={handleChange} />
 
-                        <label htmlFor="password">Password:</label>
-                        <input type="password" id="password" name="password" />
+                        <label>Password:</label>
+                        <input type="password" name="password" value={formData.password} onChange={handleChange} />
                     </div>
 
-                    <div className='set2'>
-                        <label htmlFor="street">Street</label>
-                        <input type="text" id="street" name="street" />
+                    <div className="set2">
+                        <label>Street:</label>
+                        <input type="text" name="street" value={formData.street} onChange={handleChange} />
 
-                        <label htmlFor="district">District:</label>
-                        <input type="text" id="district" name="district" />
+                        <label>District:</label>
+                        <input type="text" name="district" value={formData.district} onChange={handleChange} />
 
-                        <label htmlFor="state">State:</label>
-                        <input type="text" id="state" name="state" />
+                        <label>State:</label>
+                        <input type="text" name="state" value={formData.state} onChange={handleChange} />
 
-                        <label htmlFor="pincode">PinCode:</label>
-                        <input type="text" id="pincode" name="pincode" />
+                        <label>PinCode:</label>
+                        <input type="text" name="pincode" value={formData.pincode} onChange={handleChange} />
 
-                        <label htmlFor="cpassword">Confirm Password:</label>
-                        <input type="password" id="cpassword" name="cpassword" />
+                        <label>Confirm Password:</label>
+                        <input type="password" name="cpassword" value={formData.cpassword} onChange={handleChange} />
                     </div>
                 </div>
 
-                <label>Register as:</label>
-                <div className="radioGroup">
-                    <label>
-                        <input
-                            type="radio"
-                            name="role"
-                            value="buyer"
-                            checked={role === 'buyer'}
-                            onChange={handleRoleChange}
-                        />
-                        Buyer
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            name="role"
-                            value="seller"
-                            checked={role === 'seller'}
-                            onChange={handleRoleChange}
-                        />
-                        Seller
-                    </label>
-                </div>
+            <div className="radioGroup">
+                <label>
+                <input
+                    type="radio"
+                    name="role"
+                    value="buyer"
+                    checked={formData.role === "buyer"}
+                    onChange={handleChange}
+                />
+                Buyer
+                </label>
+                <label>
+                <input
+                    type="radio"
+                    name="role"
+                    value="seller"
+                    checked={formData.role === "seller"}
+                    onChange={handleChange}
+                />
+                Seller
+                </label>
+            </div>
 
-                <div className="formButtons">
-                    <input type="submit" value="Submit" />
-                    <input type="reset" value="Reset" />
-                </div>
+            <div className="formButtons">
+                <input type="submit" value="Submit" />
+                <input type="reset" value="Reset" />
+            </div>
             </form>
 
             <div className="loginPrompt">

@@ -1,12 +1,26 @@
-# React + Vite
+# JJD
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Backend
+1. To start the server `python manage.py runserver`
+2. To Update the changes in the databases after updating the models.py `python manage.py makemigrations`
+3. To apply the above changes made `python manage.py migrate`
+4. To open the database shell `python manage.py dbshell`
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Frontend
+1. To start the react + vite app `npm run dev`
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Learning in frontend
+1. While building any react apps you can navigate in two ways:<br>
+    a. By leaveraging the reacts single page functionality:<br>
+        i. make use of reacts components, pass parameters to these components which are called as props.<br>
+        ii. Login and Register page navigations in this app are examples fot this type of navigation.<br>
+    b.By using reacts routers and route as a differt link, that loads the new page.<br>
+        i. For example /, /login, /register.<br>
+        ii.Despite the URL changing, React still prevents a full page reload — it remains a single-page app under the hood.<br>
+
+
+
+
+## Learning in Backend
