@@ -10,3 +10,8 @@ Backend/users/migrations
 
 #databse
 Backend/db.sqlite3
+
+#node packages
+node_modules
+package-lock.json
+package.json

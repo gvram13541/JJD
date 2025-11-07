@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import '../styles/login.css';
 
-function Login() {
+import Register from './register';
+
+function Login({setComp}) {
     const [role, setRole] = useState('buyer');
     const [message, setMessage] = useState('Loging in as Buyer');
 
@@ -71,7 +73,16 @@ function Login() {
             </form>
 
             <div className="registerPrompt">
-                <a href="#">Don't have an account? Register Now!</a>
+                <a 
+                    onClick={(e) => {
+                        e.preventDefault();
+                        setComp("register")
+                    }
+
+                    }   
+                >
+                    Don't have an account? Register Now!
+                </a>
             </div>
         </div>
     );
