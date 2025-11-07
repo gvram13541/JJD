@@ -4,42 +4,72 @@ import '../styles/login.css';
 import Register from './register';
 
 function Login({setComp}) {
-    const [role, setRole] = useState('buyer');
-    const [message, setMessage] = useState('Loging in as Buyer');
+    const [formData, setFormData] = useState({
+        phone_number: "",
+        email: "",
+        password: "",
+        role: "buyer"
+    });
 
-    const handleRoleChange = (event) => {
-        const value = event.target.value;
-        setRole(value);
+    const handleChange = (event) => {
+        const {name, value} = event.target;
 
-        if (value === 'seller') {
-            setMessage('Logging in as Seller');
-        } else if (value === 'buyer') {
-            setMessage('Logging in as Buyer');
-        } else {
-            setMessage('Login');
-        }
+        setFormData(prev => ({
+            ...prev,
+            [name]: value
+        }));
     };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        if ((!formData.phone_number && !formData.email) || !formData.password || !formData.role) {
+            alert("Please provide required fields (Phone/Email, Password, and Role)");
+        }
+
+        try {
+            const response = await fetch("http://127.0.0.1:8000/users/login/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if(!response.ok){
+                throw new Error("Failed to login!");
+            }
+
+            const data = await response.json();
+            console.log("Login Successful", data);
+            alert("Login Successful");
+            setComp("register");
+        } catch(err) {
+            console.error("Error occured: ", err);
+            alert("Login Failed!");
+        }
+    }
 
     return (
         <div className="login">
-            <form action="#" method="POST" className="loginForm">
-                <h2>{message}</h2>
+            <form onSubmit={handleSubmit} className="loginForm">
+                <h2>Loging in as a {formData.role}</h2>
 
                 <div className='username'>
                     <div className="field">
-                      <label htmlFor="pnumber">Phone Number:</label>
-                      <input type="text" id="pnumber" name="pnumber" />
+                      <label>Phone Number:</label>
+                      <input type="text" name="phone_number" value={formData.phone_number} onChange={handleChange}/>
                     </div>
                     <div className="or">or</div>
                     <div className="field">
-                      <label htmlFor="emailid">Email ID:</label>
-                      <input type="text" id="emailid" name="email" />
+                      <label>Email ID:</label>
+                      <input type="text" name="email" value={formData.email} onChange={handleChange}/>
                     </div>
                 </div>
                 
                 <div>
-                    <label htmlFor="password">Password:</label>
-                    <input type="password" id="password" name="password" />
+                    <label>Password:</label>
+                    <input type="password" name="password" value={formData.password} onChange={handleChange}/>
                 </div>
 
                 <label>Logging in as:</label>
@@ -49,8 +79,8 @@ function Login({setComp}) {
                             type="radio"
                             name="role"
                             value="buyer"
-                            checked={role === 'buyer'}
-                            onChange={handleRoleChange}
+                            checked={formData.role === "buyer"}
+                            onChange={handleChange}
                         />
                         Buyer
                     </label>
@@ -59,8 +89,8 @@ function Login({setComp}) {
                             type="radio"
                             name="role"
                             value="seller"
-                            checked={role === 'seller'}
-                            onChange={handleRoleChange}
+                            checked={formData.role === 'seller'}
+                            onChange={handleChange}
                         />
                         Seller
                     </label>

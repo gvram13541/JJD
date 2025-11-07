@@ -20,3 +20,4 @@ class LoginView(APIView):
             user = serialiser.validated_data['user']
             return Response({"message":"Login Successful", "name":f"Welconme {user.name}"})
         return Response({"message":serialiser.errors}, status=status.HTTP_400_BAD_REQUEST)
+

@@ -20,8 +20,8 @@ class RegisterSerialiser(serializers.Serializer):
 
 class LoginSerialiser(serializers.Serializer):
     role = serializers.CharField()
-    phone_number = serializers.CharField(required=False)
-    email = serializers.EmailField(required=False)
+    phone_number = serializers.CharField(required=False, allow_blank=True)
+    email = serializers.EmailField(required=False, allow_blank=True)
     password = serializers.CharField(write_only = True)
 
     def validate(self, data):
