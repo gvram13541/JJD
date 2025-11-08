@@ -9,7 +9,6 @@ import '../styles/welcome.css'
 
 function Welcome() {
     const [comp, setComp] = useState("login");
-    const [message, setMessage] = useState("Welcome Back to JJ Dairies");
 
     return (
         <> 
@@ -24,9 +23,6 @@ function Welcome() {
                         {comp === "login" && <Login setComp={setComp} />}
                         {comp === "register" && <Register setComp={setComp} />}
                     </div>
-                    {/* <div className="side2">
-                        <Register />
-                    </div> */}
                 </div>
             </div>
         </>

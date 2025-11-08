@@ -46,3 +46,14 @@ class LoginSerialiser(serializers.Serializer):
         
         data['user'] = user
         return data
+
+class UserSerialiser(serializers.Serializer):
+    name = serializers.CharField(max_length=47)
+    role = serializers.CharField(max_length=10)
+    phone_number = serializers.CharField(max_length=10)
+    email = serializers.EmailField(max_length=100)
+    village = serializers.CharField(max_length=100)
+    street = serializers.CharField(max_length=100)
+    district = serializers.CharField(max_length=100)
+    state = serializers.CharField(max_length=100)
+    pincode = serializers.CharField(max_length=100)

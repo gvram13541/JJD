@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import '../styles/login.css';
 
-import Register from './register';
+import { useNavigate } from 'react-router-dom';
 
 function Login({setComp}) {
     const [formData, setFormData] = useState({
@@ -19,6 +19,8 @@ function Login({setComp}) {
             [name]: value
         }));
     };
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -42,8 +44,9 @@ function Login({setComp}) {
 
             const data = await response.json();
             console.log("Login Successful", data);
+            console.log(data.user);
             alert("Login Successful");
-            setComp("register");
+            navigate('/profile', {state: data.user});
         } catch(err) {
             console.error("Error occured: ", err);
             alert("Login Failed!");

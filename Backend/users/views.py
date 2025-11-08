@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
-from .serialiser import RegisterSerialiser, LoginSerialiser
+from .serialiser import RegisterSerialiser, LoginSerialiser, UserSerialiser
 
 class RegisterView(APIView):
     def post(self, request):
@@ -18,6 +18,6 @@ class LoginView(APIView):
         serialiser = LoginSerialiser(data=request.data)
         if serialiser.is_valid():
             user = serialiser.validated_data['user']
-            return Response({"message":"Login Successful", "name":f"Welconme {user.name}"})
+            serialised_user = UserSerialiser(user)
+            return Response({"message":"Login Successful", "name":f"Welcome {user.name}", "user":serialised_user.data})
         return Response({"message":serialiser.errors}, status=status.HTTP_400_BAD_REQUEST)
-

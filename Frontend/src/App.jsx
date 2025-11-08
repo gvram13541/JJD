@@ -1,31 +1,19 @@
-import WelcomeNav from './pages/welcomeNav.jsx';
-import Welcome from './pages/welcome.jsx';
-import AboutUs from './pages/aboutUs.jsx';
-import Reviews from './pages/reviews.jsx';
-import ContactUs from './pages/contactUs.jsx';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import Home from './pages/home';
+import UserProfile from './components/profile';
 
 import './App.css';
 
 function App() {
   return (
     <>
-      <WelcomeNav />
-
-      <div id="home">
-        <Welcome />
-      </div>
-
-      <div id="about">
-        <AboutUs />
-      </div>
-
-      <div id="reviews">
-        <Reviews />
-      </div>
-
-      <div id="contact">
-        <ContactUs />
-      </div>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<UserProfile />} />
+        </Routes>
+      </Router>
     </>
   );
 }

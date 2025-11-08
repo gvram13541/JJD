@@ -2,7 +2,6 @@ import { useState } from 'react';
 import '../styles/register.css';
 
 function Register({setComp}) {
-    // const [role, setRole] = useState('buyer');
     const [formData, setFormData] = useState({
         name: "",
         phone_number: "",
