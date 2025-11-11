@@ -16,12 +16,12 @@ function Buyer() {
     const selectedOption = true;
 
     const products = [
-        { id: 1, name: "Milk", img: "milk.jpg" },
-        { id: 2, name: "Curd", img: "curd.jpg" },
-        { id: 3, name: "Butter", img: "butter.jpg" },
-        { id: 4, name: "Cheese", img: "cheese.jpg" },
-        { id: 5, name: "Paneer", img: "paneer.jpg" },
-        { id: 6, name: "Ghee", img: "ghee.jpg" },
+        { id: 1, name: "Milk", img: "https://nutritionsource.hsph.harvard.edu/wp-content/uploads/2024/11/AdobeStock_354060824-1024x683.jpeg" },
+        { id: 2, name: "Curd", img: "https://j6e2i8c9.delivery.rocketcdn.me/wp-content/uploads/2014/06/How-to-set-curd-in-winters-13.jpg.webp" },
+        { id: 3, name: "Butter", img: "https://apnifarming.com/wp-content/uploads/2025/02/images-2.jpg" },
+        { id: 4, name: "Cheese", img: "https://therecipecritic.com/wp-content/uploads/2025/04/cheese-sauce-4-3.jpg" },
+        { id: 5, name: "Paneer", img: "https://5.imimg.com/data5/SELLER/Default/2024/10/459794365/PU/KQ/LI/146757746/fresh-malai-paneer.jpg" },
+        { id: 6, name: "Ghee", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Home_made_Ghee.jpg/1200px-Home_made_Ghee.jpg" },
     ];
 
     return (
