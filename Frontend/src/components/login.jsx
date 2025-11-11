@@ -46,7 +46,7 @@ function Login({setComp}) {
             console.log("Login Successful", data);
             console.log(data.user);
             alert("Login Successful");
-            navigate('/profile', {state: data.user});
+            navigate('/buyer', {state: data.user});
         } catch(err) {
             console.error("Error occured: ", err);
             alert("Login Failed!");

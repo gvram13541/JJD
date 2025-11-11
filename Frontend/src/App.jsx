@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Home from './pages/home';
-import UserProfile from './components/profile';
+import Buyer from './components/buyer';
 
 import './App.css';
 
@@ -11,7 +11,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/profile" element={<UserProfile />} />
+          <Route path="/buyer" element={<Buyer />} />
         </Routes>
       </Router>
     </>
