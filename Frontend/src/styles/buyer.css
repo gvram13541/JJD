@@ -101,6 +101,11 @@ button {
     font-weight: bold;
 }
 
+button:hover{
+    background: white;
+    color: #98f436;
+}
+
 button:disabled {
     opacity: 0.5;
     cursor: default;

@@ -36,7 +36,8 @@
     gap: 15px;
 }
 
-label {
+.set1 label,
+.set2 label {
     font-size: 16px;
     color: #444;
     background: #f8f9fa;
