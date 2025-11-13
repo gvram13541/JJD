@@ -46,7 +46,14 @@ function Login({setComp}) {
             console.log("Login Successful", data);
             console.log(data.user);
             alert("Login Successful");
-            navigate('/buyer', {state: data.user});
+            if(formData.role === 'seller') {
+                navigate('/seller', {state: data.user});
+            } else if(formData.role === 'buyer') {
+                navigate('/buyer', {state: data.user});
+            } else {
+                navigate('pagenotfound');
+            }
+            
         } catch(err) {
             console.error("Error occured: ", err);
             alert("Login Failed!");

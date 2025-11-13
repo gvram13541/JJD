@@ -1,40 +1,31 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Products from './products';
+import SoldOuts from './soldouts';
 import UserProfile from '../profile';
-import Search from './search';
 import PaymentHistory from './payment';
-import MyCart from './cart';
-import MyOrders from './orders';
-import MyAddresses from './address';
+import SellMyProducts from './sell';
 import PageNotFound from '../../pages/pagenotfound';
 
-import '../../styles/buyer.css';
+import '../../styles/seller.css';
 
-function Buyer() {
+function Seller() {
     const navigate = useNavigate();
-    const [bodyComponent, setBodyComponent] = useState(<Products />);
+    const [bodyComponent, setBodyComponent] = useState(<UserProfile />);
 
     const handleClick = (event) => {
         if(event === 'logout') {
             console.log(event);
             alert("Loging Out");
             navigate('/');
-        } else if(event === 'products') {
-            setBodyComponent(<Products />);
+        } else if(event === 'soldouts') {
+            setBodyComponent(<SoldOuts />);
+        } else if(event === 'sell') {
+            setBodyComponent(<SellMyProducts />);
         } else if(event === 'profile') {
             setBodyComponent(<UserProfile />);
-        } else if(event === 'search') {
-            setBodyComponent(<Search />);
         } else if(event === 'pay_history') {
             setBodyComponent(<PaymentHistory />);
-        } else if(event === 'my_cart') {
-            setBodyComponent(<MyCart />);
-        } else if(event === 'my_orders') {
-            setBodyComponent(<MyOrders />);
-        } else if(event === 'my_address') {
-            setBodyComponent(<MyAddresses />);
         } else {
             setBodyComponent(<PageNotFound />)
         }
@@ -43,42 +34,21 @@ function Buyer() {
     return (
         <div className="dashboard">
             <div className="sidebar">
-                <h2>Buyer Dashboard</h2>
+                <h2>Seller Dashboard</h2>
                 <ul>
                     <li    
                         onClick={
-                            () => handleClick('search')
+                            () => handleClick('soldouts')
                         }
                     >
-                        Search
+                        Sold Outs
                     </li>
                     <li    
                         onClick={
-                            () => handleClick('products')
+                            () => handleClick('sell')
                         }
                     >
-                        Products
-                    </li>
-                    <li    
-                        onClick={
-                            () => handleClick('my_orders')
-                        }
-                    >
-                        My Orders
-                    </li>
-                    <li    
-                        onClick={
-                            () => handleClick('my_cart')
-                        }
-                    >
-                        My Cart
-                    </li>
-                    <li    
-                        onClick={
-                            () => handleClick('my_address')
-                        }
-                    >
-                        My Addresses
+                        Sell My Products
                     </li>
                     <li    
                         onClick={
@@ -111,4 +81,4 @@ function Buyer() {
     );
 }
 
-export default Buyer;
+export default Seller;
