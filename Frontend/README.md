@@ -20,7 +20,4 @@
         i. For example /, /login, /register.<br>
         ii.Despite the URL changing, React still prevents a full page reload — it remains a single-page app under the hood.<br>
 
-
-
-
 ## Learning in Backend

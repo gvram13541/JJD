@@ -16,11 +16,31 @@ function Buyer() {
     const navigate = useNavigate();
     const [bodyComponent, setBodyComponent] = useState(<Products />);
 
-    const handleClick = (event) => {
+    const handleClick = async (event) => {
         if(event === 'logout') {
             console.log(event);
-            alert("Loging Out");
-            navigate('/');
+            try {
+                const response = await fetch("http://127.0.0.1:8000/users/logout/", {
+                    method: "POST",
+                    credentials: "include",
+                });
+
+                console.log("Logout Response Status:", response.status);
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error("Backend Error:", errorText);
+                    throw new Error("Logout failed");
+                }
+
+                const data = await response.json();
+                alert(data.message);
+                navigate("/", { replace: true });
+
+            } catch (err) {
+                console.error("Logout failed:", err);
+            }
+            return ;
         } else if(event === 'products') {
             setBodyComponent(<Products />);
         } else if(event === 'profile') {

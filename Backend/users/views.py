@@ -14,10 +14,18 @@ class RegisterView(APIView):
 
 
 class LoginView(APIView):
+    def post(self, request):        
+        serializer = LoginSerialiser(data=request.data)
+        if serializer.is_valid():
+            user = serializer.validated_data['user']
+            serialized_user = UserSerialiser(user)
+            request.session['user_id'] = user.id
+            request.session['role'] = user.role
+            return Response({"message": "Login Successful", "user": serialized_user.data})
+        return Response({"message": serializer.errors}, status=400)
+
+
+class LogoutView(APIView):
     def post(self, request):
-        serialiser = LoginSerialiser(data=request.data)
-        if serialiser.is_valid():
-            user = serialiser.validated_data['user']
-            serialised_user = UserSerialiser(user)
-            return Response({"message":"Login Successful", "name":f"Welcome {user.name}", "user":serialised_user.data})
-        return Response({"message":serialiser.errors}, status=status.HTTP_400_BAD_REQUEST)
+        request.session.flush()
+        return Response({"message": "Logged out successfully"}, status=status.HTTP_200_OK)
