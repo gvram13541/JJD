@@ -21,3 +21,4 @@
         ii.Despite the URL changing, React still prevents a full page reload — it remains a single-page app under the hood.<br>
 
 ## Learning in Backend
+1. Only validation credentials is not proper authentication, sending a seesion id or token for every api is a proper authentication.

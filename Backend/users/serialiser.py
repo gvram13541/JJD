@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.hashers import make_password, check_password
-from .models import User
+from .models import User, Address
 
 class RegisterSerialiser(serializers.Serializer):
     name = serializers.CharField(max_length=47)
@@ -8,6 +8,7 @@ class RegisterSerialiser(serializers.Serializer):
     phone_number = serializers.CharField(max_length=10)
     email = serializers.EmailField(max_length=100)
     password = serializers.CharField(write_only = True, max_length=200)
+
     village = serializers.CharField(max_length=100)
     street = serializers.CharField(max_length=100)
     district = serializers.CharField(max_length=100)
@@ -15,8 +16,20 @@ class RegisterSerialiser(serializers.Serializer):
     pincode = serializers.CharField(max_length=100)
 
     def create(self, validated_data):
+        address_fields = {
+            'village': validated_data.pop('village'),
+            'street': validated_data.pop('street'),
+            'district': validated_data.pop('district'),
+            'state': validated_data.pop('state'),
+            'pincode': validated_data.pop('pincode'),
+        }
+
         validated_data['password'] = make_password(validated_data['password'])
-        return User.objects.create(**validated_data)
+
+        user = User.objects.create(**validated_data)
+        Address.objects.create(user = user, is_default=True, **address_fields)
+
+        return user
 
 class LoginSerialiser(serializers.Serializer):
     role = serializers.CharField()
@@ -52,8 +65,3 @@ class UserSerialiser(serializers.Serializer):
     role = serializers.CharField(max_length=10)
     phone_number = serializers.CharField(max_length=10)
     email = serializers.EmailField(max_length=100)
-    village = serializers.CharField(max_length=100)
-    street = serializers.CharField(max_length=100)
-    district = serializers.CharField(max_length=100)
-    state = serializers.CharField(max_length=100)
-    pincode = serializers.CharField(max_length=100)
