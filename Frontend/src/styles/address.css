@@ -1,0 +1,55 @@
+.address-container {
+    padding: 20px;
+    max-width: 900px;
+    margin: auto;
+    background: #f9fafb;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+.address-title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.address-table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.address-table th {
+    background-color: #f49e36;
+    color: white;
+    font-weight: bold;
+    padding: 12px;
+    text-align: left;
+}
+
+.address-table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    color: #444;
+}
+
+.address-table tr:nth-child(even) {
+    background-color: #f2f5f7;
+}
+
+.address-table tr:hover {
+    background-color: #e8f1fd;
+    transition: 0.2s ease-in-out;
+}
+
+@media (max-width: 768px) {
+    .address-table {
+        font-size: 14px;
+    }
+    
+    .address-title {
+        font-size: 20px;
+    }
+}
