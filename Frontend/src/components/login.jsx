@@ -30,7 +30,7 @@ function Login({setComp}) {
         }
 
         try {
-            const response = await fetch("http://127.0.0.1:8000/users/login/", {
+            const response = await fetch("http://localhost:8000/users/login/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

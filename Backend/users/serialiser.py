@@ -65,3 +65,11 @@ class UserSerialiser(serializers.Serializer):
     role = serializers.CharField(max_length=10)
     phone_number = serializers.CharField(max_length=10)
     email = serializers.EmailField(max_length=100)
+
+class AddressSerialiser(serializers.Serializer):
+    village = serializers.CharField(max_length=100)
+    street = serializers.CharField(max_length=100)
+    district = serializers.CharField(max_length=100)
+    state = serializers.CharField(max_length=100)
+    pincode = serializers.CharField(max_length=100)
+    is_default = serializers.BooleanField(default=False)
