@@ -33,6 +33,7 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
 INSTALLED_APPS = [
     'users',
+    'inventory',
     'rest_framework',
     'corsheaders',
     'django.contrib.sessions',

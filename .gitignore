@@ -8,6 +8,10 @@ Backend/Backend/__pycache__
 Backend/users/__pycache__
 Backend/users/migrations
 
+#inventory
+Backend/inventory/__pycache__
+Backend/inventory/migrations
+
 #databse
 Backend/db.sqlite3
 
