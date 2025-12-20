@@ -34,5 +34,41 @@
             "metric": "Kgs",
             "image_path": "https://apnifarming.com/wp-content/uploads/2025/02/images-2.jpg"
         }
+    },
+    {
+        "model": "inventory.inventory",
+        "fields": {
+            "i_id": "IID0004",
+            "i_name": "Cheese", 
+            "quantity_in": 100,
+            "quantity_out": 0,
+            "cost": 50,
+            "metric": "Liters",
+            "image_path": "https://therecipecritic.com/wp-content/uploads/2025/04/cheese-sauce-4-3.jpg"
+        }
+    }, 
+    {
+        "model": "inventory.inventory",
+        "fields": {
+            "i_id": "IID0005",
+            "i_name": "Panner", 
+            "quantity_in": 100,
+            "quantity_out": 0,
+            "cost": 55,
+            "metric": "Liters",
+            "image_path": "https://5.imimg.com/data5/SELLER/Default/2024/10/459794365/PU/KQ/LI/146757746/fresh-malai-paneer.jpg"
+        }
+    },
+    {
+        "model": "inventory.inventory",
+        "fields": {
+            "i_id": "IID0006",
+            "i_name": "Ghee", 
+            "quantity_in": 100,
+            "quantity_out": 0,
+            "cost": 100,
+            "metric": "Kgs",
+            "image_path": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Home_made_Ghee.jpg/1200px-Home_made_Ghee.jpg"
+        }
     }
 ]

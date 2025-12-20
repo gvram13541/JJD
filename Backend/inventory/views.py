@@ -14,6 +14,6 @@ class InventoryView(APIView):
         item_details = Inventory.objects.all().order_by('id')
         inventory_serialiser = InventorySerialiser(item_details, many = True)
 
-        return Response(data=inventory_serialiser.data, status=status.HTTP_200_OK)
+        return Response({"itemsList":inventory_serialiser.data}, status=status.HTTP_200_OK)
 
 

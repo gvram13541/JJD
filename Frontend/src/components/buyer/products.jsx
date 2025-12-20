@@ -21,8 +21,8 @@ function Products() {
             }
             
             const data = await response.json();
-            console.log(data)
-            setItemsList(data)
+            console.log(data.itemsList)
+            setItemsList(data.itemsList)
         } catch (error) {
             console.error("Error fetching addresses:", error);
         }
@@ -31,15 +31,6 @@ function Products() {
     useEffect(() => {
         getItemsList();
     }, []);
-
-    const products = [
-        { id: 1, name: "Milk", img: "https://nutritionsource.hsph.harvard.edu/wp-content/uploads/2024/11/AdobeStock_354060824-1024x683.jpeg" },
-        { id: 2, name: "Curd", img: "https://j6e2i8c9.delivery.rocketcdn.me/wp-content/uploads/2014/06/How-to-set-curd-in-winters-13.jpg.webp" },
-        { id: 3, name: "Butter", img: "https://apnifarming.com/wp-content/uploads/2025/02/images-2.jpg" },
-        { id: 4, name: "Cheese", img: "https://therecipecritic.com/wp-content/uploads/2025/04/cheese-sauce-4-3.jpg" },
-        { id: 5, name: "Paneer", img: "https://5.imimg.com/data5/SELLER/Default/2024/10/459794365/PU/KQ/LI/146757746/fresh-malai-paneer.jpg" },
-        { id: 6, name: "Ghee", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Home_made_Ghee.jpg/1200px-Home_made_Ghee.jpg" },
-    ];
 
     const handleOptionChange = (event) => {
         console.log("Options");
@@ -56,7 +47,7 @@ function Products() {
     return(
         <div className="product-grid">
             {itemsList.map(p => (
-                <div className="card" key={p.id}>
+                <div className="card" key={p.i_id}>
                     <img src={p.image_path} alt={p.i_name} />
                     <h3>{p.i_name}</h3>
 
