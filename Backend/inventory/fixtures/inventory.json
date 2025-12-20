@@ -1,0 +1,38 @@
+[
+    {
+        "model": "inventory.inventory",
+        "fields": {
+            "i_id": "IID0001",
+            "i_name": "Milk", 
+            "quantity_in": 100,
+            "quantity_out": 0,
+            "cost": 50,
+            "metric": "Liters",
+            "image_path": "https://nutritionsource.hsph.harvard.edu/wp-content/uploads/2024/11/AdobeStock_354060824-1024x683.jpeg"
+        }
+    }, 
+    {
+        "model": "inventory.inventory",
+        "fields": {
+            "i_id": "IID0002",
+            "i_name": "Curd", 
+            "quantity_in": 100,
+            "quantity_out": 0,
+            "cost": 55,
+            "metric": "Liters",
+            "image_path": "https://j6e2i8c9.delivery.rocketcdn.me/wp-content/uploads/2014/06/How-to-set-curd-in-winters-13.jpg.webp"
+        }
+    },
+    {
+        "model": "inventory.inventory",
+        "fields": {
+            "i_id": "IID0003",
+            "i_name": "Butter", 
+            "quantity_in": 100,
+            "quantity_out": 0,
+            "cost": 100,
+            "metric": "Kgs",
+            "image_path": "https://apnifarming.com/wp-content/uploads/2025/02/images-2.jpg"
+        }
+    }
+]

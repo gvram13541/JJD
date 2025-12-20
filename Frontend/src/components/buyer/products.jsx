@@ -1,9 +1,36 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import '../../styles/buyer.css';
 
 function Products() {
     const [selectedOption, setSelectedOption] = useState(false);
+    const [itemsList, setItemsList] = useState([]);
+
+    const getItemsList = async () => {
+        try {
+            const response = await fetch("http://localhost:8000/inventory/getitems/", {
+                method: "GET", 
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+            });
+
+            if(!response.ok) {
+                throw new Error("Failed to fecth the items list");
+            }
+            
+            const data = await response.json();
+            console.log(data)
+            setItemsList(data)
+        } catch (error) {
+            console.error("Error fetching addresses:", error);
+        }
+    }
+
+    useEffect(() => {
+        getItemsList();
+    }, []);
 
     const products = [
         { id: 1, name: "Milk", img: "https://nutritionsource.hsph.harvard.edu/wp-content/uploads/2024/11/AdobeStock_354060824-1024x683.jpeg" },
@@ -28,10 +55,10 @@ function Products() {
 
     return(
         <div className="product-grid">
-            {products.map(p => (
+            {itemsList.map(p => (
                 <div className="card" key={p.id}>
-                    <img src={p.img} alt={p.name} />
-                    <h3>{p.name}</h3>
+                    <img src={p.image_path} alt={p.i_name} />
+                    <h3>{p.i_name}</h3>
 
                     <select name="variant" onChange={handleOptionChange}>
                         <option value="">Select Option</option>
