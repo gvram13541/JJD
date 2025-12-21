@@ -57,5 +57,4 @@ class Address(models.Model):
             last_addr = Address.objects.order_by('-id').first()
             next_id = 1 if not last_addr else last_addr.id + 1
             self.aid = f"AID{next_id:04d}"
-
         return super().save(*args, **kwargs)
