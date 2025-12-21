@@ -1,73 +1,67 @@
 [
     {
-        "model": "inventory.inventory",
+        "model": "inventory.products",
+        "pk": 1,
         "fields": {
             "i_id": "IID0001",
-            "i_name": "Milk", 
+            "i_name": "Milk",
             "quantity_in": 100,
             "quantity_out": 0,
-            "cost": 50,
-            "metric": "Liters",
             "image_path": "https://nutritionsource.hsph.harvard.edu/wp-content/uploads/2024/11/AdobeStock_354060824-1024x683.jpeg"
         }
-    }, 
+    },
     {
-        "model": "inventory.inventory",
+        "model": "inventory.products",
+        "pk": 2,
         "fields": {
             "i_id": "IID0002",
-            "i_name": "Curd", 
+            "i_name": "Curd",
             "quantity_in": 100,
             "quantity_out": 0,
-            "cost": 55,
-            "metric": "Liters",
             "image_path": "https://j6e2i8c9.delivery.rocketcdn.me/wp-content/uploads/2014/06/How-to-set-curd-in-winters-13.jpg.webp"
         }
     },
     {
-        "model": "inventory.inventory",
+        "model": "inventory.products",
+        "pk": 3,
         "fields": {
             "i_id": "IID0003",
-            "i_name": "Butter", 
+            "i_name": "Butter",
             "quantity_in": 100,
             "quantity_out": 0,
-            "cost": 100,
-            "metric": "Kgs",
             "image_path": "https://apnifarming.com/wp-content/uploads/2025/02/images-2.jpg"
         }
     },
     {
-        "model": "inventory.inventory",
+        "model": "inventory.products",
+        "pk": 4,
         "fields": {
             "i_id": "IID0004",
-            "i_name": "Cheese", 
+            "i_name": "Cheese",
             "quantity_in": 100,
             "quantity_out": 0,
-            "cost": 50,
-            "metric": "Liters",
             "image_path": "https://therecipecritic.com/wp-content/uploads/2025/04/cheese-sauce-4-3.jpg"
         }
-    }, 
+    },
     {
-        "model": "inventory.inventory",
+        "model": "inventory.products",
+        "pk": 5,
         "fields": {
             "i_id": "IID0005",
-            "i_name": "Panner", 
+            "i_name": "Paneer",
             "quantity_in": 100,
             "quantity_out": 0,
-            "cost": 55,
-            "metric": "Liters",
             "image_path": "https://5.imimg.com/data5/SELLER/Default/2024/10/459794365/PU/KQ/LI/146757746/fresh-malai-paneer.jpg"
         }
     },
     {
-        "model": "inventory.inventory",
+        "model": "inventory.products",
+        "pk": 6,
         "fields": {
             "i_id": "IID0006",
-            "i_name": "Ghee", 
+            "i_name": "Ghee",
             "quantity_in": 100,
             "quantity_out": 0,
-            "cost": 100,
-            "metric": "Kgs",
             "image_path": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Home_made_Ghee.jpg/1200px-Home_made_Ghee.jpg"
         }
     }

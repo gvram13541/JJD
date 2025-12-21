@@ -5,10 +5,11 @@ import '../../styles/buyer.css';
 function Products() {
     const [selectedOption, setSelectedOption] = useState(false);
     const [itemsList, setItemsList] = useState([]);
+    const [productVariantsList, setProductVariantsList] = useState([]);
 
     const getItemsList = async () => {
         try {
-            const response = await fetch("http://localhost:8000/inventory/getitems/", {
+            const response = await fetch("http://localhost:8000/inventory/getproducts/", {
                 method: "GET", 
                 headers: {
                     "Content-Type": "application/json",
@@ -24,12 +25,36 @@ function Products() {
             console.log(data.itemsList)
             setItemsList(data.itemsList)
         } catch (error) {
-            console.error("Error fetching addresses:", error);
+            console.error("Error fetching products:", error);
+        }
+    }
+
+    const getProductWiseVariants = async () => {
+        try {
+            const response = await fetch("http://localhost:8000/inventory/getproductvariants/", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+            });
+            if(!response.ok) {
+                throw new Error("Failed to fetch product varaints from backend");
+            }
+            const data = await response.json();
+            console.log(data.pwv)
+            setProductVariantsList(data.pwv)
+        } catch(error) {
+            console.error("Error fetching product variants: ", error)
         }
     }
 
     useEffect(() => {
         getItemsList();
+    }, []);
+
+    useEffect(() => {
+        getProductWiseVariants();
     }, []);
 
     const handleOptionChange = (event) => {
@@ -40,7 +65,7 @@ function Products() {
         console.log("Adding to Cart");
     };
 
-    const handleBuyNow = (event) => {
+    const handleQuantity = (event) => {
         console.log("Buying");
     };
 
@@ -60,7 +85,11 @@ function Products() {
 
                     <div className="btn-group">
                         <button disabled={!selectedOption} onClick={handleAddToCart}>Add to Cart</button>
-                        <button disabled={!selectedOption} onClick={handleBuyNow}>Buy Now</button>
+                        <div className="quantity">
+                            <button disabled={!selectedOption} onClick={handleQuantity}>-1</button>
+                            <p className="displayquantity">1</p>
+                            <button disabled={!selectedOption} onClick={handleQuantity}>+1</button>
+                        </div>
                     </div>
                 </div>
             ))}

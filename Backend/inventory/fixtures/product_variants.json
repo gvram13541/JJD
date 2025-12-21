@@ -1,0 +1,115 @@
+[
+    {
+        "model": "inventory.productvariants",
+        "pk": 1,
+        "fields": {
+            "v_id": "PVID0001",
+            "product": 1,
+            "size": 250,
+            "metric": "ml",
+            "cost": 25,
+            "available": true
+        }
+    },
+    {
+        "model": "inventory.productvariants",
+        "pk": 2,
+        "fields": {
+            "v_id": "PVID0002",
+            "product": 1,
+            "size": 500,
+            "metric": "ml",
+            "cost": 45,
+            "available": true
+        }
+    },
+    {
+        "model": "inventory.productvariants",
+        "pk": 3,
+        "fields": {
+            "v_id": "PVID0003",
+            "product": 1,
+            "size": 1,
+            "metric": "l",
+            "cost": 80,
+            "available": true
+        }
+    },
+
+    {
+        "model": "inventory.productvariants",
+        "pk": 4,
+        "fields": {
+            "v_id": "PVID0004",
+            "product": 2,
+            "size": 500,
+            "metric": "g",
+            "cost": 40,
+            "available": true
+        }
+    },
+    {
+        "model": "inventory.productvariants",
+        "pk": 5,
+        "fields": {
+            "v_id": "PVID0005",
+            "product": 2,
+            "size": 1,
+            "metric": "kg",
+            "cost": 75,
+            "available": true
+        }
+    },
+
+    {
+        "model": "inventory.productvariants",
+        "pk": 6,
+        "fields": {
+            "v_id": "PVID0006",
+            "product": 3,
+            "size": 200,
+            "metric": "g",
+            "cost": 95,
+            "available": true
+        }
+    },
+
+    {
+        "model": "inventory.productvariants",
+        "pk": 7,
+        "fields": {
+            "v_id": "PVID0007",
+            "product": 4,
+            "size": 250,
+            "metric": "g",
+            "cost": 120,
+            "available": true
+        }
+    },
+
+    {
+        "model": "inventory.productvariants",
+        "pk": 8,
+        "fields": {
+            "v_id": "PVID0008",
+            "product": 5,
+            "size": 250,
+            "metric": "g",
+            "cost": 90,
+            "available": true
+        }
+    },
+
+    {
+        "model": "inventory.productvariants",
+        "pk": 9,
+        "fields": {
+            "v_id": "PVID0009",
+            "product": 6,
+            "size": 500,
+            "metric": "ml",
+            "cost": 220,
+            "available": true
+        }
+    }
+]
