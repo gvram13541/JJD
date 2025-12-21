@@ -23,9 +23,10 @@ class ProductVariantView(APIView):
         if not user_id:
             return Response({'message':'User Not Logged In'}, status=status.HTTP_401_UNAUTHORIZED)
 
-        products_with_variants = ProductVariants.objects.all().order_by('product')
+        products_with_variants = ProductVariants.objects.select_related('product').all().order_by('id')
         print(products_with_variants)
 
         product_variant_serialiser = ProductVariantSerialiser(products_with_variants, many=True)
+        print(product_variant_serialiser.data)
 
         return Response({"pwv":product_variant_serialiser.data}, status=status.HTTP_200_OK)

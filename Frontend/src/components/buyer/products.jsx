@@ -3,9 +3,10 @@ import { useEffect, useState } from 'react';
 import '../../styles/buyer.css';
 
 function Products() {
-    const [selectedOption, setSelectedOption] = useState(false);
+    const [selectedOption, setSelectedOption] = useState(null);
     const [itemsList, setItemsList] = useState([]);
     const [productVariantsList, setProductVariantsList] = useState([]);
+    const [displayQuantity, setDispalyQuantity] = useState(0)
 
     const getItemsList = async () => {
         try {
@@ -58,15 +59,22 @@ function Products() {
     }, []);
 
     const handleOptionChange = (event) => {
-        console.log("Options");
+        setSelectedOption(event.target.value);
+        console.log(event.target.value);
     };
 
     const handleAddToCart = (event) => {
         console.log("Adding to Cart");
     };
 
-    const handleQuantity = (event) => {
-        console.log("Buying");
+    const handleQuantityMinus = (event) => {
+        setDispalyQuantity(displayQuantity-1)
+        console.log(displayQuantity);
+    };
+
+    const handleQuantityPlus = (event) => {
+        setDispalyQuantity(displayQuantity+1)
+        console.log(displayQuantity);
     };
 
     return(
@@ -78,17 +86,19 @@ function Products() {
 
                     <select name="variant" onChange={handleOptionChange}>
                         <option value="">Select Option</option>
-                        <option value="small">Small</option>
-                        <option value="medium">Medium</option>
-                        <option value="large">Large</option>
+                        {productVariantsList
+                            .filter(pv => pv.product.i_id == p.i_id)
+                            .map(pv => (
+                            <option key={pv.product.i_id + pv.size} value={pv.v_id}>{pv.size} {pv.metric} ₹{pv.cost}</option>
+                        ))}
                     </select>
 
                     <div className="btn-group">
                         <button disabled={!selectedOption} onClick={handleAddToCart}>Add to Cart</button>
                         <div className="quantity">
-                            <button disabled={!selectedOption} onClick={handleQuantity}>-1</button>
-                            <p className="displayquantity">1</p>
-                            <button disabled={!selectedOption} onClick={handleQuantity}>+1</button>
+                            <button disabled={!selectedOption} onClick={handleQuantityMinus}>-1</button>
+                            <p className="displayquantity">{displayQuantity}</p>
+                            <button disabled={!selectedOption} onClick={handleQuantityPlus}>+1</button>
                         </div>
                     </div>
                 </div>

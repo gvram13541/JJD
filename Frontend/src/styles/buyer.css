@@ -110,3 +110,15 @@ button:disabled {
     opacity: 0.5;
     cursor: default;
 }
+
+.quantity {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.displayquantity {
+    margin: 0 5px;
+    min-width: 20px;
+    text-align: center;
+}

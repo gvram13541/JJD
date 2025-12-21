@@ -30,7 +30,7 @@ class ProductVariants(models.Model):
     updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.product.i_name} {self.size}{self.metric}"
+        return f"{self.product.i_id}{self.size}{self.metric}{self.cost}"
     
     def save(self, *args, **kwargs):
         if not self.v_id:
