@@ -4,9 +4,8 @@ import '../../styles/buyer.css';
 
 function Products() {
     const [selectedVariant, setSelectedVariant] = useState({});
-    const [displayQuantity, setDispalyQuantity] = useState({});
     const [productsAndVariants, setProductsAndVariants] = useState([]);
-    const [addToCart, setAddToCart] = useState([]);
+    const [addToCart, setAddToCart] = useState({});
 
     const getProductsAndVariants = async () => {
         try{
@@ -37,40 +36,59 @@ function Products() {
             ...prev,
             [productId]: variantId
         }));
-
-        setDispalyQuantity(prev => ({
-            ...prev,
-            [variantId]: prev[variantId] || 1
-        }));
     };
 
     const handleAddToCart = (productId, variantId) => {
-        setAddToCart(prev => [
-            ...prev,
-            {
-                "ProductID": productId, 
-                "VariantID": variantId,
-                "Quantity": displayQuantity[variantId]
+        setAddToCart(prevCart => {
+            if(prevCart[variantId]) {
+                return {
+                    ...prevCart,
+                    [variantId]: {
+                        ...prevCart[variantId],
+                        quantity: prevCart[variantId].quantity + 1
+                    }
+                };
+            } else {
+                return {
+                    ...prevCart,
+                    [variantId]: {
+                        productId, quantity: 1
+                    }
+                }
             }
-        ]);
-        console.log("Added to Cart");
-        console.log("Current Cart: ", addToCart);
+        });
     };
 
+    useEffect(() => {
+        console.log("Cart updated:", addToCart);
+    }, [addToCart])
+
     const handleQuantityMinus = (variantId) => {
-        setDispalyQuantity(prev => ({
-            ...prev,
-            [variantId]: Math.max((prev[variantId] || 1)-1, 0)
-        }));
-        console.log(displayQuantity);
+        setAddToCart(prevCart => {
+            if(!prevCart[variantId]) return prevCart;
+
+            return {
+                ...prevCart,
+                [variantId]: {
+                    ...prevCart[variantId],
+                    quantity: Math.max(prevCart[variantId].quantity - 1, 1)
+                }
+            };
+        });
     };
 
     const handleQuantityPlus = (variantId) => {
-        setDispalyQuantity(prev => ({
-            ...prev,
-            [variantId]: (prev[variantId] || 1)+1
-        }))
-        console.log(displayQuantity);
+        setAddToCart(prevCart => {
+            if(!prevCart[variantId]) return prevCart;
+
+            return {
+                ...prevCart,
+                [variantId]: {
+                    ...prevCart[variantId],
+                    quantity: prevCart[variantId].quantity + 1
+                }
+            };
+        });
     };
 
     return(
@@ -82,17 +100,32 @@ function Products() {
 
                     <select name="variant" value={selectedVariant[pav.i_id] || ""} onChange={(event) => {handleVariantChange(pav.i_id, event.target.value)}}>
                         <option value="">Select Variants</option>
-                        {pav.variants.map(variant => (
-                            <option key={variant.v_id + variant.size} value={variant.v_id}>{variant.size} {variant.metric} ₹{variant.cost}</option>
+                        {Array.from(
+                            new Map(
+                                pav.variants.map((variant) => [
+                                    variant.v_id,
+                                    variant,
+                                ])
+                            ).values()
+                        ).map((variant) => (
+                            <option key={variant.v_id} value={variant.v_id}>
+                                {variant.size} {variant.metric} ₹{variant.cost}
+                            </option>
                         ))}
                     </select>
 
                     <div className="btn-group">
-                        <button disabled={!selectedVariant[pav.i_id]} onClick={() => handleAddToCart(pav.i_id, selectedVariant[pav.i_id])}>Add to Cart</button>
+                        <button disabled={!selectedVariant[pav.i_id]} onClick={() => handleAddToCart(pav.i_id, selectedVariant[pav.i_id])}>
+                            Add to Cart
+                        </button>
                         <div className="quantity">
-                            <button disabled={!selectedVariant[pav.i_id]} onClick={() => handleQuantityMinus(selectedVariant[pav.i_id])}>-1</button>
-                            <p className="displayquantity">{displayQuantity[selectedVariant[pav.i_id]]}</p>
-                            <button disabled={!selectedVariant[pav.i_id]} onClick={() => handleQuantityPlus(selectedVariant[pav.i_id])}>+1</button>
+                            <button disabled={!selectedVariant[pav.i_id]} onClick={() => handleQuantityMinus(selectedVariant[pav.i_id])}>
+                                -1
+                            </button>
+                            <p className="displayquantity">{addToCart[selectedVariant[pav.i_id]]?.quantity || 0}</p>
+                            <button disabled={!selectedVariant[pav.i_id]} onClick={() => handleQuantityPlus(selectedVariant[pav.i_id])}>
+                                +1
+                            </button>
                         </div>
                     </div>
                 </div>

@@ -21,6 +21,18 @@
         ii.Despite the URL changing, React still prevents a full page reload — it remains a single-page app under the hood.<br>
 2. Cross-Origin Cookie Transmission: For session-based authentication between a frontend (e.g., localhost:5173) and a backend (e.g., localhost:8000), you must explicitly instruct the browser to send cookies in the cross-origin request.
     a. This is achieved by setting credentials: 'include' (for fetch) or withCredentials: true (for axios) on the frontend API call.
+3. State updates in React are asynchronous
+    a. Calling setState does not immediately update the state variable.<br>
+    b. Logging state right after setState will show old values.<br>
+    c. To observe updated state, use `useEffect` with the state as a dependency.
+4. Never call a state-updating function inside another state setter
+    a. State setter callbacks `(setState(prev => { ... }))` must be pure functions.<br>
+    b. Calling another function that updates state inside them causes unpredictable behavior.<br>
+    c. Each state update should be handled independently.
+5. Immutable updates are mandatory in React state
+    a. React does not merge nested objects automatically.<br>
+    b. When updating nested state, always spread previous values (...prev).<br>
+    c. Example: updating quantity without spreading removes fields like productId.
 
 ## Learning in Backend
 1. Only validation credentials is not proper authentication, sending a seesion id or token for every api is a proper authentication.
