@@ -3,102 +3,96 @@ import { useEffect, useState } from 'react';
 import '../../styles/buyer.css';
 
 function Products() {
-    const [selectedOption, setSelectedOption] = useState(null);
-    const [itemsList, setItemsList] = useState([]);
-    const [productVariantsList, setProductVariantsList] = useState([]);
-    const [displayQuantity, setDispalyQuantity] = useState(0)
+    const [selectedVariant, setSelectedVariant] = useState({});
+    const [displayQuantity, setDispalyQuantity] = useState({});
+    const [productsAndVariants, setProductsAndVariants] = useState([]);
+    const [addToCart, setAddToCart] = useState([]);
 
-    const getItemsList = async () => {
-        try {
-            const response = await fetch("http://localhost:8000/inventory/getproducts/", {
-                method: "GET", 
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                credentials: "include",
-            });
-
-            if(!response.ok) {
-                throw new Error("Failed to fecth the items list");
-            }
-            
-            const data = await response.json();
-            console.log(data.itemsList)
-            setItemsList(data.itemsList)
-        } catch (error) {
-            console.error("Error fetching products:", error);
-        }
-    }
-
-    const getProductWiseVariants = async () => {
-        try {
-            const response = await fetch("http://localhost:8000/inventory/getproductvariants/", {
+    const getProductsAndVariants = async () => {
+        try{
+            const response = await fetch("http://localhost:8000/inventory/getproductsandvariants/", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 credentials: "include",
             });
-            if(!response.ok) {
-                throw new Error("Failed to fetch product varaints from backend");
+            if(!response.ok){
+                throw new Error("Failed to fetch products and respective variants from backend");
             }
             const data = await response.json();
-            console.log(data.pwv)
-            setProductVariantsList(data.pwv)
+            console.log(data.products_and_variants)
+            setProductsAndVariants(data.products_and_variants)
         } catch(error) {
-            console.error("Error fetching product variants: ", error)
+            console.error("Error: ", error)
         }
     }
 
     useEffect(() => {
-        getItemsList();
+        getProductsAndVariants();
     }, []);
 
-    useEffect(() => {
-        getProductWiseVariants();
-    }, []);
+    const handleVariantChange = (productId, variantId) => {
+        setSelectedVariant(prev => ({
+            ...prev,
+            [productId]: variantId
+        }));
 
-    const handleOptionChange = (event) => {
-        setSelectedOption(event.target.value);
-        console.log(event.target.value);
+        setDispalyQuantity(prev => ({
+            ...prev,
+            [variantId]: prev[variantId] || 1
+        }));
     };
 
-    const handleAddToCart = (event) => {
-        console.log("Adding to Cart");
+    const handleAddToCart = (productId, variantId) => {
+        setAddToCart(prev => [
+            ...prev,
+            {
+                "ProductID": productId, 
+                "VariantID": variantId,
+                "Quantity": displayQuantity[variantId]
+            }
+        ]);
+        console.log("Added to Cart");
+        console.log("Current Cart: ", addToCart);
     };
 
-    const handleQuantityMinus = (event) => {
-        setDispalyQuantity(displayQuantity-1)
+    const handleQuantityMinus = (variantId) => {
+        setDispalyQuantity(prev => ({
+            ...prev,
+            [variantId]: Math.max((prev[variantId] || 1)-1, 0)
+        }));
         console.log(displayQuantity);
     };
 
-    const handleQuantityPlus = (event) => {
-        setDispalyQuantity(displayQuantity+1)
+    const handleQuantityPlus = (variantId) => {
+        setDispalyQuantity(prev => ({
+            ...prev,
+            [variantId]: (prev[variantId] || 1)+1
+        }))
         console.log(displayQuantity);
     };
 
     return(
         <div className="product-grid">
-            {itemsList.map(p => (
-                <div className="card" key={p.i_id}>
-                    <img src={p.image_path} alt={p.i_name} />
-                    <h3>{p.i_name}</h3>
+            {productsAndVariants.map(pav => (
+                <div className="card" key={pav.i_id}>
+                    <img src={pav.image_path} alt={pav.i_name} />
+                    <h3>{pav.i_name}</h3>
 
-                    <select name="variant" onChange={handleOptionChange}>
-                        <option value="">Select Option</option>
-                        {productVariantsList
-                            .filter(pv => pv.product.i_id == p.i_id)
-                            .map(pv => (
-                            <option key={pv.product.i_id + pv.size} value={pv.v_id}>{pv.size} {pv.metric} ₹{pv.cost}</option>
+                    <select name="variant" value={selectedVariant[pav.i_id] || ""} onChange={(event) => {handleVariantChange(pav.i_id, event.target.value)}}>
+                        <option value="">Select Variants</option>
+                        {pav.variants.map(variant => (
+                            <option key={variant.v_id + variant.size} value={variant.v_id}>{variant.size} {variant.metric} ₹{variant.cost}</option>
                         ))}
                     </select>
 
                     <div className="btn-group">
-                        <button disabled={!selectedOption} onClick={handleAddToCart}>Add to Cart</button>
+                        <button disabled={!selectedVariant[pav.i_id]} onClick={() => handleAddToCart(pav.i_id, selectedVariant[pav.i_id])}>Add to Cart</button>
                         <div className="quantity">
-                            <button disabled={!selectedOption} onClick={handleQuantityMinus}>-1</button>
-                            <p className="displayquantity">{displayQuantity}</p>
-                            <button disabled={!selectedOption} onClick={handleQuantityPlus}>+1</button>
+                            <button disabled={!selectedVariant[pav.i_id]} onClick={() => handleQuantityMinus(selectedVariant[pav.i_id])}>-1</button>
+                            <p className="displayquantity">{displayQuantity[selectedVariant[pav.i_id]]}</p>
+                            <button disabled={!selectedVariant[pav.i_id]} onClick={() => handleQuantityPlus(selectedVariant[pav.i_id])}>+1</button>
                         </div>
                     </div>
                 </div>
