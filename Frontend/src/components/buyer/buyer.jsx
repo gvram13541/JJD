@@ -13,8 +13,10 @@ import PageNotFound from '../../pages/pagenotfound';
 import '../../styles/buyer.css';
 
 function Buyer() {
+    const [addToCart, setAddToCart] = useState({})
+    const [productsAndVariants, setProductsAndVariants] = useState([]);
     const navigate = useNavigate();
-    const [bodyComponent, setBodyComponent] = useState(<Products />);
+    const [activePage, setActivePage] = useState('profile')
 
     const handleClick = async (event) => {
         if(event === 'logout') {
@@ -41,24 +43,9 @@ function Buyer() {
                 console.error("Logout failed:", err);
             }
             return ;
-        } else if(event === 'products') {
-            setBodyComponent(<Products />);
-        } else if(event === 'profile') {
-            setBodyComponent(<UserProfile />);
-        } else if(event === 'search') {
-            setBodyComponent(<Search />);
-        } else if(event === 'pay_history') {
-            setBodyComponent(<PaymentHistory />);
-        } else if(event === 'my_cart') {
-            setBodyComponent(<MyCart />);
-        } else if(event === 'my_orders') {
-            setBodyComponent(<MyOrders />);
-        } else if(event === 'my_address') {
-            setBodyComponent(<MyAddresses />);
-        } else {
-            setBodyComponent(<PageNotFound />)
-        }
-    }
+        } 
+        setActivePage(event);
+    };
 
     return (
         <div className="dashboard">
@@ -125,7 +112,27 @@ function Buyer() {
             </div>
 
             <div className="body">
-                {bodyComponent}
+                {activePage === 'products' && (
+                    <Products
+                    addToCart={addToCart}
+                    setAddToCart={setAddToCart}
+                    productsAndVariants={productsAndVariants}
+                    setProductsAndVariants={setProductsAndVariants}
+                    />
+                )}
+
+                {activePage === 'my_cart' && (
+                    <MyCart
+                    addToCart={addToCart}
+                    productsAndVariants={productsAndVariants}
+                    />
+                )}
+
+                {activePage === 'profile' && <UserProfile />}
+                {activePage === 'search' && <Search />}
+                {activePage === 'my_orders' && <MyOrders />}
+                {activePage === 'my_address' && <MyAddresses />}
+                {activePage === 'pay_history' && <PaymentHistory />}
             </div>
         </div>
     );

@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 
 import '../../styles/buyer.css';
 
-function Products() {
+function Products({addToCart, setAddToCart, productsAndVariants, setProductsAndVariants}) {
     const [selectedVariant, setSelectedVariant] = useState({});
-    const [productsAndVariants, setProductsAndVariants] = useState([]);
-    const [addToCart, setAddToCart] = useState({});
+    // const [productsAndVariants, setProductsAndVariants] = useState([]);
+    // const [addToCart, setAddToCart] = useState({});
 
     const getProductsAndVariants = async () => {
         try{
