@@ -33,6 +33,20 @@
     a. React does not merge nested objects automatically.<br>
     b. When updating nested state, always spread previous values (...prev).<br>
     c. Example: updating quantity without spreading removes fields like productId.
+6. State management and lifting state
+    a. Initially, the cart state (addToCart) was being managed inside Products.jsx only.<br>
+    b. Mistake: Switching components caused cart data to reset or become inaccessible in other components like MyCart.<br>
+    c. Learning: Shared state must live in a common parent (Buyer.jsx) and be passed down as props to all relevant children.
+7. Using .map() incorrectly on objects
+    a. Mistake: Tried to use .map() directly on an object (addToCart) like it was an array.<br>
+    b. Learning: Objects cannot use .map(). Use Object.entries(), Object.keys(), or Object.values() to iterate over objects.
+8. Declaring variables inside JSX
+    a. Mistake: Tried to declare const cartList = [] directly inside {} in JSX.<br>
+    b. Learning: JSX expressions cannot contain statements. Variables must be declared before return, or use inline expressions.
+9. Mutating arrays during render
+    a. Mistake: Used displayCart.push(...) inside map() calls to build cart items.<br>
+    b. Learning: React render must be pure. Don’t mutate arrays during render; instead, build arrays using map() and assign them to a variable before rendering.
+10. Avoid the nested loops inside render, insted precompute them in the component and then use in render.
 
 ## Learning in Backend
 1. Only validation credentials is not proper authentication, sending a seesion id or token for every api is a proper authentication.
