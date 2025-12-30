@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Products from './products';
@@ -13,10 +13,16 @@ import PageNotFound from '../../pages/pagenotfound';
 import '../../styles/buyer.css';
 
 function Buyer() {
-    const [addToCart, setAddToCart] = useState({})
-    const [productsAndVariants, setProductsAndVariants] = useState([]);
-    const navigate = useNavigate();
+    const [addToCart, setAddToCart] = useState(() => {
+        const savedCart = localStorage.getItem('cart');
+        return savedCart ? JSON.parse(savedCart):{};
+    });
+    const [productsAndVariants, setProductsAndVariants] = useState(() => {
+        const cached = sessionStorage.getItem('pav');
+        return cached ? JSON.parse(cached):[];
+    });
     const [activePage, setActivePage] = useState('profile')
+    const navigate = useNavigate();
 
     const handleClick = async (event) => {
         if(event === 'logout') {
@@ -46,6 +52,10 @@ function Buyer() {
         } 
         setActivePage(event);
     };
+
+    useEffect(() => {
+        localStorage.setItem("cart", JSON.stringify(addToCart));
+    }, [addToCart]);
 
     return (
         <div className="dashboard">

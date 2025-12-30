@@ -20,8 +20,9 @@ function Products({addToCart, setAddToCart, productsAndVariants, setProductsAndV
                 throw new Error("Failed to fetch products and respective variants from backend");
             }
             const data = await response.json();
-            console.log(data.products_and_variants)
-            setProductsAndVariants(data.products_and_variants)
+            console.log(data.products_and_variants);
+            setProductsAndVariants(data.products_and_variants);
+            sessionStorage.setItem("pav", JSON.stringify(data.products_and_variants));
         } catch(error) {
             console.error("Error: ", error)
         }
