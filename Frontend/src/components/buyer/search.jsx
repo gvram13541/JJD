@@ -1,63 +1,79 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import '../../styles/login.css';
 
-function Search() {
-
-    const items = ['milk', 'curd', 'panner', 'ghee', 'buffallo milk', 'cow milk', 'honey'];
-
-    const [formData, setFormData] = useState({
-        search: "",
-    });
+function Search({ 
+    productsAndVariants, 
+    selectedVariant, 
+    addToCart, 
+    handleAddToCart, 
+    handleQuantityMinus, 
+    handleQuantityPlus, 
+    handleVariantChange 
+}) {
+    const [searchValue, setSearchValue] = useState("");
+    const [searchResult, setSearchResult] = useState([]);
 
     const handleChange = (event) => {
-        const {name, value} = event.target;
-
-        setFormData(prev => ({
-            ...prev,
-            [name]: value
-        }));
-    };
-
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-
-        try {
-            console.log("Searched!");
-            const searchTerm = formData.search.toLowerCase();
-
-            if (Array.isArray(items)) {
-            if (items.includes(searchTerm)) {
-                alert(`You are looking for: ${formData.search}`);
-            } else {
-                alert("Couldn't find what you are looking for...Sorry!");
-            }
-            } else if (searchTerm in items) {
-            alert(`You are looking for: ${formData.search}`);
-            } else {
-            alert("Couldn't find what you are looking for...Sorry!");
-            }
-        } catch (err) {
-            console.error("Error occurred:", err);
-            alert("An error occurred while searching.");
+        const value = event.target.value;
+        setSearchValue(value);
+        
+        if(!value){
+            setSearchResult([]);
+            return;
         }
+
+        const results = productsAndVariants.filter(item => 
+            item.i_name.toLowerCase().includes(value.toLowerCase())
+        );
+
+        setSearchResult(results);
     };
 
     return (
         <div className="search">
-            <form onSubmit={handleSubmit} className="loginForm">
+            <form className="loginForm" onSubmit={(e) => e.preventDefault()}>
                 <h2>What Are You Looking For?</h2>
-                <div>
-                    {/* <label>What Are You Looking For?: </label> */}
-                    <input type="text" name="search" value={formData.search} onChange={handleChange}/>
-                </div>
-                <div className="formButtons">
-                    <input type="submit" value="Submit" />
-                    <input type="reset" value="Reset" />
-                </div>
+                <input type="text" name="search" value={searchValue} onChange={handleChange}/>
             </form>
+
+            <div className="product-grid">
+                {searchResult.map(pav => (
+                    <div className="card" key={pav.i_id}>
+                        <img src={pav.image_path} alt={pav.i_name} />
+                        <h3>{pav.i_name}</h3>
+
+                        <select 
+                            value={selectedVariant[pav.i_id] || ""} 
+                            onChange={(e) => handleVariantChange(pav.i_id, e.target.value)}
+                        >
+                            <option value="">Select Variants</option>
+                            {pav.variants.map((variant) => (
+                                <option key={variant.v_id} value={variant.v_id}>
+                                    {variant.size} {variant.metric} ₹{variant.cost}
+                                </option>
+                            ))}
+                        </select>
+
+                        <div className="btn-group">
+                            <button disabled={!selectedVariant[pav.i_id]} onClick={() => handleAddToCart(pav.i_id, selectedVariant[pav.i_id])}>
+                                Add to Cart
+                            </button>
+                            <div className="quantity">
+                                <button disabled={!selectedVariant[pav.i_id]} onClick={() => handleQuantityMinus(selectedVariant[pav.i_id])}>
+                                    -1
+                                </button>
+                                <p className="displayquantity">{addToCart[selectedVariant[pav.i_id]]?.quantity || 0}</p>
+                                <button disabled={!selectedVariant[pav.i_id]} onClick={() => handleQuantityPlus(selectedVariant[pav.i_id])}>
+                                    +1
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>
-    )
+    );
 }
 
 export default Search;

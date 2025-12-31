@@ -2,8 +2,19 @@ import { useEffect, useState } from 'react';
 
 import '../../styles/buyer.css';
 
-function Products({addToCart, setAddToCart, productsAndVariants, setProductsAndVariants}) {
-    const [selectedVariant, setSelectedVariant] = useState({});
+function Products({
+    addToCart, 
+    setAddToCart, 
+    productsAndVariants, 
+    setProductsAndVariants, 
+    selectedVariant, 
+    setSelectedVariant,
+    handleAddToCart, 
+    handleQuantityMinus, 
+    handleQuantityPlus, 
+    handleVariantChange 
+}) {
+    // const [selectedVariant, setSelectedVariant] = useState({});
     // const [productsAndVariants, setProductsAndVariants] = useState([]);
     // const [addToCart, setAddToCart] = useState({});
 
@@ -32,65 +43,9 @@ function Products({addToCart, setAddToCart, productsAndVariants, setProductsAndV
         getProductsAndVariants();
     }, []);
 
-    const handleVariantChange = (productId, variantId) => {
-        setSelectedVariant(prev => ({
-            ...prev,
-            [productId]: variantId
-        }));
-    };
-
-    const handleAddToCart = (productId, variantId) => {
-        setAddToCart(prevCart => {
-            if(prevCart[variantId]) {
-                return {
-                    ...prevCart,
-                    [variantId]: {
-                        ...prevCart[variantId],
-                        quantity: prevCart[variantId].quantity + 1
-                    }
-                };
-            } else {
-                return {
-                    ...prevCart,
-                    [variantId]: {
-                        productId, quantity: 1
-                    }
-                }
-            }
-        });
-    };
-
     useEffect(() => {
         console.log("Cart updated:", addToCart);
     }, [addToCart])
-
-    const handleQuantityMinus = (variantId) => {
-        setAddToCart(prevCart => {
-            if(!prevCart[variantId]) return prevCart;
-
-            return {
-                ...prevCart,
-                [variantId]: {
-                    ...prevCart[variantId],
-                    quantity: Math.max(prevCart[variantId].quantity - 1, 1)
-                }
-            };
-        });
-    };
-
-    const handleQuantityPlus = (variantId) => {
-        setAddToCart(prevCart => {
-            if(!prevCart[variantId]) return prevCart;
-
-            return {
-                ...prevCart,
-                [variantId]: {
-                    ...prevCart[variantId],
-                    quantity: prevCart[variantId].quantity + 1
-                }
-            };
-        });
-    };
 
     return(
         <div className="product-grid">

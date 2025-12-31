@@ -21,6 +21,7 @@ function Buyer() {
         const cached = sessionStorage.getItem('pav');
         return cached ? JSON.parse(cached):[];
     });
+    const [selectedVariant, setSelectedVariant] = useState({});
     const [activePage, setActivePage] = useState('profile')
     const navigate = useNavigate();
 
@@ -51,6 +52,62 @@ function Buyer() {
             return ;
         } 
         setActivePage(event);
+    };
+
+    const handleVariantChange = (productId, variantId) => {
+        setSelectedVariant(prev => ({
+            ...prev,
+            [productId]: variantId
+        }));
+    };
+
+    const handleAddToCart = (productId, variantId) => {
+        setAddToCart(prevCart => {
+            if(prevCart[variantId]) {
+                return {
+                    ...prevCart,
+                    [variantId]: {
+                        ...prevCart[variantId],
+                        quantity: prevCart[variantId].quantity + 1
+                    }
+                };
+            } else {
+                return {
+                    ...prevCart,
+                    [variantId]: {
+                        productId, quantity: 1
+                    }
+                }
+            }
+        });
+    };
+
+    const handleQuantityMinus = (variantId) => {
+        setAddToCart(prevCart => {
+            if(!prevCart[variantId]) return prevCart;
+
+            return {
+                ...prevCart,
+                [variantId]: {
+                    ...prevCart[variantId],
+                    quantity: Math.max(prevCart[variantId].quantity - 1, 1)
+                }
+            };
+        });
+    };
+
+    const handleQuantityPlus = (variantId) => {
+        setAddToCart(prevCart => {
+            if(!prevCart[variantId]) return prevCart;
+
+            return {
+                ...prevCart,
+                [variantId]: {
+                    ...prevCart[variantId],
+                    quantity: prevCart[variantId].quantity + 1
+                }
+            };
+        });
     };
 
     useEffect(() => {
@@ -128,6 +185,12 @@ function Buyer() {
                     setAddToCart={setAddToCart}
                     productsAndVariants={productsAndVariants}
                     setProductsAndVariants={setProductsAndVariants}
+                    selectedVariant={selectedVariant}
+                    setSelectedVariant={setSelectedVariant}
+                    handleAddToCart={handleAddToCart}
+                    handleQuantityMinus={handleQuantityMinus}
+                    handleQuantityPlus={handleQuantityPlus}
+                    handleVariantChange={handleVariantChange}
                     />
                 )}
 
@@ -139,7 +202,20 @@ function Buyer() {
                 )}
 
                 {activePage === 'profile' && <UserProfile />}
-                {activePage === 'search' && <Search />}
+
+                {activePage === 'search' && (
+                    <Search 
+                    productsAndVariants={productsAndVariants}
+                    selectedVariant={selectedVariant}
+                    setSelectedVariant={setSelectedVariant}
+                    addToCart={addToCart}
+                    handleAddToCart={handleAddToCart}
+                    handleQuantityMinus={handleQuantityMinus}
+                    handleQuantityPlus={handleQuantityPlus}
+                    handleVariantChange={handleVariantChange}
+                    />
+                )}
+
                 {activePage === 'my_orders' && <MyOrders />}
                 {activePage === 'my_address' && <MyAddresses />}
                 {activePage === 'pay_history' && <PaymentHistory />}
