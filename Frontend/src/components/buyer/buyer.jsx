@@ -42,6 +42,11 @@ function Buyer() {
                     throw new Error("Logout failed");
                 }
 
+                localStorage.removeItem("cart");
+                setAddToCart({});
+                sessionStorage.getItem('pav');
+                setProductsAndVariants([]);
+
                 const data = await response.json();
                 alert(data.message);
                 navigate("/", { replace: true });
