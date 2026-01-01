@@ -26,7 +26,7 @@
     color: white;
     font-weight: bold;
     padding: 12px;
-    text-align: left;
+    text-align: center;
 }
 
 .address-table td {
@@ -52,4 +52,16 @@
     .address-title {
         font-size: 20px;
     }
+}
+
+
+/* styling for cart.jsx */
+.btn-group
+.checkout {
+    position: fixed;
+    width: 80%;
+    bottom: 20px;
+    right: 40px;
+    z-index: 1000;
+    padding: 12px 24px;
 }

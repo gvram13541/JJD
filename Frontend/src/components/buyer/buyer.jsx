@@ -22,7 +22,7 @@ function Buyer() {
         return cached ? JSON.parse(cached):[];
     });
     const [selectedVariant, setSelectedVariant] = useState({});
-    const [activePage, setActivePage] = useState('profile')
+    const [activePage, setActivePage] = useState('profile');
     const navigate = useNavigate();
 
     const handleClick = async (event) => {

@@ -1,13 +1,15 @@
 import "../../styles/address.css";
 
-function MyCart({addToCart = {}, productsAndVariants = []}) {
+function MyCart({addToCart = {}, productsAndVariants = [], totals = []}) {
     const variantLookup = {};
+    var totalQuantity = 0, totalCost = 0;
+
     productsAndVariants.forEach(pav => {
         pav.variants.forEach(variant => {
             variantLookup[variant.v_id] = {
                 name: pav.i_name,
                 image: pav.image_path,
-                type: variant.size,
+                type: variant.size+variant.metric,
                 cost: variant.cost
             };
         });
@@ -15,7 +17,8 @@ function MyCart({addToCart = {}, productsAndVariants = []}) {
 
     const cartList = Object.entries(addToCart).map(([variantId, item]) => {
         const variant = variantLookup[variantId] || {};
-
+        totalQuantity += item.quantity || 0;
+        totalCost += (item.quantity || 0) * (variant.cost || 0);
         return {
             variantId,
             name: variant.name || "",
@@ -65,6 +68,23 @@ function MyCart({addToCart = {}, productsAndVariants = []}) {
                 </tbody>
             </table>
             )}
+            <table className="address-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>Total Items: {totalQuantity}</th>
+                        <th></th>
+                        <th>Total Cost: ₹{totalCost}</th>
+                    </tr>
+                </thead>
+            </table>
+            <div className="btn-group">
+                <button className="checkout" onClick={() => handleCheckOut()}>
+                    Check Out
+                </button>
+            </div>
         </div>
     )
 }
